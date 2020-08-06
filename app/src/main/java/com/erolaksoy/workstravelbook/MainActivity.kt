@@ -8,9 +8,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import kotlinx.android.synthetic.main.activity_main.*
 import java.lang.Exception
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
+
+    var placesArray = ArrayList<Place>()
+
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val menuInflater = menuInflater
@@ -43,13 +48,17 @@ class MainActivity : AppCompatActivity() {
                 val latitudeFromDatabase = myCursor.getDouble(latitudeIndex)
                 val longitudeFromDatabase = myCursor.getDouble(longitudeIndex)
                 val myCurrentSavedPlace = Place(adressFromDatabase,latitudeFromDatabase,longitudeFromDatabase)
+                placesArray.add(myCurrentSavedPlace)
                 println(myCurrentSavedPlace.adress + myCurrentSavedPlace.latitude)
             }
+
             myCursor.close()
 
 
         }catch(e : Exception){e.printStackTrace()}
 
+        val customAdapter = CustomAdapter(placesArray,this)
+        listView.adapter = customAdapter
     }
 
 }
