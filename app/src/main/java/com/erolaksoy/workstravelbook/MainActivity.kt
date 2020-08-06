@@ -57,7 +57,7 @@ class MainActivity : AppCompatActivity() {
 
         }catch(e : Exception){e.printStackTrace()}
 
-        val customAdapter = CustomAdapter(placesArray,this)
+        var customAdapter = CustomAdapter(placesArray,this)
         listView.adapter = customAdapter
     }
 
